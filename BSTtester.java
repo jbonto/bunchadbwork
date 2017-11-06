@@ -1,17 +1,21 @@
-package tree;
+
 
 public class BSTtester {
 	public static void main(String[] args){
-		BST<Integer> tree = new BST<Integer>();
+		BST tree = new BST();
 		tree.add(35);
 		tree.add(33);
-		tree.add(30);
-		System.out.println(tree.height());
-		//tree.delete(17);
+		tree.add(38);
+		tree.add(17);
+		tree.add(34);
+		tree.add(40);
+		tree.add(37);
+		tree.add(41);
+
+		tree.delete(33);
 		//still trying to figure out delete
 		System.out.println("leaves "+tree.leaves());
 		//pretty print defaults depth to 4 if height hasn't been figured out
-		System.out.println(tree.toString());
-		//System.out.println(tree.inOrder(tree.getRoot()));
+		System.out.print(tree.toString());
 	}
 }

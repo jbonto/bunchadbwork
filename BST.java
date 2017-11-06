@@ -1,4 +1,4 @@
-package tree;
+
 public class BST<T extends Comparable<T>> {
 	Node<T> root;
 
@@ -17,7 +17,7 @@ public class BST<T extends Comparable<T>> {
 
 	public void add(T data) {
 		root = add(root, data);
-		
+
 	}
 	public Node<T> getRoot(){
 		return root;
@@ -46,38 +46,45 @@ public class BST<T extends Comparable<T>> {
 		if(ptr==null){
 			return 0;
 		}
-		if(ptr.left!=null && ptr.right!=null){
-			return 2 + leaves(ptr.left)+leaves(ptr.right);
+		if(ptr.left==null && ptr.right==null){
+			return 1;
+		} else if(ptr.left!=null && ptr.right!=null){
+			return 0+ leaves(ptr.left)  + leaves(ptr.right);
 		} else if (ptr.left!=null){
-			return 1 + leaves(ptr.left);
+			return 0 + leaves(ptr.left);
 		} else if (ptr.right!=null){
-			return 1 + leaves(ptr.right);
+			return 0 + leaves(ptr.right);
 		}
 		return 0;
 	}
-	
+
 	public void delete(T data){
-		root = delete(data, root);
+		delete(data, root);
 	}
-	private Node<T> delete(T data, Node<T> ptr){
-		if(ptr == null)
-			return null;
-					
-		if(ptr.data.compareTo(data)== 0){
-			if(ptr.right!=null){
-				return ptr.right;
-			} else if (ptr.left!=null){
-				return ptr.left;
-			} 
+	private void delete(T data, Node<T> ptr){
+		if(data.compareTo(ptr.data)==0){
+			System.out.println("deleted");
+			if(ptr.right!=null)
+				ptr = ptr.right;
+			else if (ptr.left!=null)
+				ptr = ptr.left;
+			else
+				ptr = null;
+			System.out.println(ptr.data);
 		} else {
-			
+			if (ptr.left!=null && ptr.right!=null){
+				delete(data, ptr.left);
+				delete(data, ptr.right);
+			} else if(ptr.right!=null){
+				delete(data, ptr.right);
+			} else if(ptr.left!=null){
+				delete(data, ptr.left);
+			}
+
 		}
-		
-		
-		return null;
 	}
 
-	 
+
 	public int height(){
 		if(root==null)
 			return 0;
